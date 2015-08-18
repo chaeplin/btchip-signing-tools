@@ -13,10 +13,19 @@ import requests
 import pprint
 pp = pprint.PrettyPrinter(indent=2)
 
+isTestnet = len(sys.argv) > 1 and sys.argv[1] == '--testnet'
+testnetBroadcast = "https://tbtc.blockr.io/api/v1/tx/push"
+mainnetBroadcast = "https://blockchain.info/pushtx"
 
+
+# Broadcast tx using a web service.
 def broadcastTx(rawTx):
-  r = requests.post("https://blockchain.info/pushtx", data={'tx': rawTx})
-  print "Transaction sent to blockchain.info. Response:"
+  if isTestnet:
+    r = requests.post(testnetBroadcast, data={'hex': rawTx})
+    print "Transaction sent to blockr.io. Response:"
+  else:
+    r = requests.post(mainnetBroadcast, data={'tx': rawTx})
+    print "Transaction sent to blockchain.info. Response:"
   print(r.text)
 
 
