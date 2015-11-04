@@ -15,17 +15,17 @@ pp = pprint.PrettyPrinter(indent=2)
 
 isTestnet = len(sys.argv) > 1 and sys.argv[1] == '--testnet'
 testnetBroadcast = "https://tbtc.blockr.io/api/v1/tx/push"
-mainnetBroadcast = "https://blockchain.info/pushtx"
+mainnetBroadcast = "http://btc.blockr.io/api/v1/tx/push"
 
 
 # Broadcast tx using a web service.
 def broadcastTx(rawTx):
   if isTestnet:
     r = requests.post(testnetBroadcast, data={'hex': rawTx})
-    print "Transaction sent to blockr.io. Response:"
+    print "Transaction sent to tbtc.blockr.io. Response:"
   else:
-    r = requests.post(mainnetBroadcast, data={'tx': rawTx})
-    print "Transaction sent to blockchain.info. Response:"
+    r = requests.post(mainnetBroadcast, data={'hex': rawTx})
+    print "Transaction sent to blockr.info. Response:"
   print(r.text)
 
 
@@ -71,7 +71,7 @@ def decodeSigCollect():
   print "\nRaw Transaction:\n"
   print raw
 
-  print "\nBroadcast Transaction:\nhttps://blockchain.info/pushtx\n"
+  print "\nBroadcast Transaction:\nhttps://btc.blockr.io/tx/push\n"
 
 if __name__ == "__main__":
   decodeSigCollect()
