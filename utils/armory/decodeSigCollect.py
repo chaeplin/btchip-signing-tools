@@ -25,7 +25,7 @@ def broadcastTx(rawTx):
     print "Transaction sent to tbtc.blockr.io. Response:"
   else:
     r = requests.post(mainnetBroadcast, data={'hex': rawTx})
-    print "Transaction sent to blockr.info. Response:"
+    print "Transaction sent to btc.blockr.io. Response:"
   print(r.text)
 
 
