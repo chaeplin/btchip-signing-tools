@@ -7,7 +7,6 @@ if cmd_subfolder not in sys.path:
 from armoryengine.Transaction import *
 from armoryengine.ArmoryUtils import binary_to_hex, hex_to_binary
 import json
-import settings
 from distutils import util
 import requests
 import pprint
