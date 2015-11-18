@@ -2,7 +2,7 @@ import os, sys, inspect
 # Add ../../BitcoinArmory to path so it works as if we were importing it from the inside.
 cmd_subfolder = os.path.realpath(os.path.abspath(os.path.join(os.path.split(inspect.getfile( inspect.currentframe() ))[0],"../../BitcoinArmory")))
 if cmd_subfolder not in sys.path:
-    sys.path.insert(0, cmd_subfolder)
+  sys.path.insert(0, cmd_subfolder)
 
 from armoryengine.Transaction import *
 from armoryengine.ArmoryUtils import binary_to_hex, hex_to_binary
@@ -14,17 +14,17 @@ pp = pprint.PrettyPrinter(indent=2)
 
 isTestnet = len(sys.argv) > 1 and sys.argv[1] == '--testnet'
 testnetBroadcast = "https://tbtc.blockr.io/api/v1/tx/push"
-mainnetBroadcast = "http://btc.blockr.io/api/v1/tx/push"
+mainnetBroadcast = "https://blockchain.info/pushtx"
 
 
 # Broadcast tx using a web service.
 def broadcastTx(rawTx):
   if isTestnet:
     r = requests.post(testnetBroadcast, data={'hex': rawTx})
-    print "Transaction sent to tbtc.blockr.io. Response:"
+    print "Transaction sent to blockr.io. Response:"
   else:
-    r = requests.post(mainnetBroadcast, data={'hex': rawTx})
-    print "Transaction sent to btc.blockr.io. Response:"
+    r = requests.post(mainnetBroadcast, data={'tx': rawTx})
+    print "Transaction sent to blockchain.info. Response:"
   print(r.text)
 
 
@@ -70,7 +70,7 @@ def decodeSigCollect():
   print "\nRaw Transaction:\n"
   print raw
 
-  print "\nBroadcast Transaction:\nhttps://btc.blockr.io/tx/push\n"
+  print "\nBroadcast Transaction:\nhttps://blockchain.info/pushtx\n"
 
 if __name__ == "__main__":
   decodeSigCollect()
