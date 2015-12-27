@@ -28,7 +28,7 @@ def broadcastTx(rawTx):
   print(r.text)
 
 
-# We've had SIGCOLLECTs fail to broadcaset from Armory. Recently we had one with multiple
+# We've had SIGCOLLECTs fail to broadcast from Armory. Recently we had one with multiple
 # signed inputs completely fail with a `string index out of range` error in Armory.
 #
 # This tool takes in a SIGCOLLECT block and prints transaction details and a raw transaction that can be
@@ -70,7 +70,10 @@ def decodeSigCollect():
   print "\nRaw Transaction:\n"
   print raw
 
-  print "\nBroadcast Transaction:\nhttps://blockchain.info/pushtx\n"
+  if isTestnet:
+      print "\nBroadcast Transaction:\nhttp://tbtc.blockr.io/tx/push\n"
+  else:
+      print "\nBroadcast Transaction:\nhttps://blockchain.info/pushtx\n"
 
 if __name__ == "__main__":
   decodeSigCollect()
